@@ -1,8 +1,11 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EvaluationService {
 
@@ -30,8 +33,13 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String[] stringArr = phrase.split("[\\s-]");
+		char[] charArr = new char[stringArr.length];
+		
+		for(int i = 0; i < stringArr.length; i++)
+			charArr[i] = stringArr[i].charAt(0);
+		
+		return String.valueOf(charArr).toUpperCase();
 	}
 
 	/**
@@ -84,18 +92,28 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if(this.sideOne == this.sideTwo && this.sideTwo == this.sideThree)
+				return true;
+			else
+				return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if(this.sideOne == this.sideTwo && this.sideTwo == this.sideThree)
+				return false;
+			if(this.sideOne != this.sideTwo && this.sideTwo == this.sideThree || this.sideThree == this.sideOne)
+				return true;
+			else
+				return false;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if(this.sideOne == this.sideTwo && this.sideTwo == this.sideThree)
+				return false;
+			if(this.sideOne != this.sideTwo && this.sideTwo == this.sideThree || this.sideThree == this.sideOne)
+				return false;
+			else
+				return true;
 		}
 
 	}
@@ -116,8 +134,27 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		char[] charArr = string.toUpperCase().toCharArray();
+		int count = 0;
+		
+		for(int i = 0; i < charArr.length; i++)
+		{
+			if("AEIOULNRST".indexOf(charArr[i]) != -1)
+				count = count + 1;
+			else if("DG".indexOf(charArr[i]) != -1)
+				count = count + 2;
+			else if("BCMP".indexOf(charArr[i]) != -1)
+				count = count + 3;
+			else if("FHVWY".indexOf(charArr[i]) != -1)
+				count = count + 4;
+			else if("K".indexOf(charArr[i]) != -1)
+				count = count + 5;
+			else if("JX".indexOf(charArr[i]) != -1)
+				count = count + 8;
+			else if("QZ".indexOf(charArr[i]) != -1)
+				count = count + 10;
+		}
+		return count;
 	}
 
 	/**
@@ -152,8 +189,15 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String clean = string.replaceAll("[^0-9]", "");
+		char[] cArr = clean.toCharArray();
+		if(cArr[0] == '1')
+			cArr[0] = ' ';
+		String done = String.valueOf(cArr).trim();	
+		if(done.length() > 11 || done.length() < 10)
+			throw new IllegalArgumentException();
+		else
+			return done;
 	}
 
 	/**
@@ -166,8 +210,22 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String newS = string.replaceAll("\n", "");
+		String[] stringArr = newS.split("[\s,]");
+		int count = 0;
+		Map<String, Integer> may = new HashMap<String, Integer>();
+		
+		for(int i = 0; i < stringArr.length; i++)
+		{
+			Pattern pat = Pattern.compile(stringArr[i]);
+			Matcher mat = pat.matcher(string);
+			while(mat.find())
+				count++;
+			
+			may.put(stringArr[i], count);
+			count = 0;
+		}
+		return may;
 	}
 
 	/**
@@ -246,7 +304,10 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
+		Pattern r = Pattern.compile("[aeiou]/gi");
+		Matcher m = r.matcher(string);
+		
+		
 		return null;
 	}
 
