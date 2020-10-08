@@ -1,14 +1,10 @@
 package com.revature.eval.java.core;
 
-import java.time.Duration;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -227,6 +223,7 @@ public class EvaluationService {
 		{
 			Pattern pat = Pattern.compile(stringArr[i]);
 			Matcher mat = pat.matcher(string);
+			
 			while(mat.find())
 				count++;
 			
@@ -285,19 +282,14 @@ public class EvaluationService {
 				int middle = low +(high - low)/2;
 				//System.out.println(middle);
 				if(t.compareTo(sortedList.get(middle)) == 0)
-				{
 					return middle;
-				}
+				
 				else if(t.compareTo(sortedList.get(middle)) < 0)
-				{
 					high = middle -1;
-				}
+				
 				else if(t.compareTo(sortedList.get(middle)) > 0)
-				{
 					low = middle + 1;
-				}
 			}
-			
 			
 			return 0;
 		}
@@ -344,10 +336,7 @@ public class EvaluationService {
 		StringBuilder sb = new StringBuilder();
 		
 		for(String word : words)
-		{
 			sb.append(wordPig(word) + " ");
-		}
-		
 		
 		return sb.toString().trim();
 		
@@ -370,14 +359,11 @@ public class EvaluationService {
 				if(vowel.contains(String.valueOf(input.charAt(i))))
 				{
 					if(input.substring(0, i).charAt(0) == 'q')
-					{
 						return answer + input.substring(i +1) + input.substring(0, i) + "uay";
-					}
-					else
-					{
-						return answer + input.substring(i) + input.substring(0, i) + "ay";
-					}
 					
+					else
+						return answer + input.substring(i) + input.substring(0, i) + "ay";
+				
 				}
 			}
 		}
@@ -486,26 +472,26 @@ public class EvaluationService {
 		String rotbet = alphabet.substring(key) + alphabet.substring(0,key);
 		
 		for(int i = 0; i < answer.length(); i++)
-		{
-			
-			if(Character.isUpperCase(answer.charAt(i)))
-				caseflag = true;
-			else
-				caseflag = false;
-			
-            char current = Character.toUpperCase(answer.charAt(i));
-
-            if(alphabet.indexOf(current) != -1)
-	            {
-	                int index2 = alphabet.indexOf(current);
-	                char newChar = rotbet.charAt(index2);
-	                
-	                if(caseflag)
-	                	answer.setCharAt(i, newChar);
-	                else
-	                	answer.setCharAt(i, Character.toLowerCase(newChar));
-	            }
-			}
+			{
+				//remember if it's lower or upper case
+				if(Character.isUpperCase(answer.charAt(i)))
+					caseflag = true;
+				else
+					caseflag = false;
+				
+	            char current = Character.toUpperCase(answer.charAt(i));
+	
+	            if(alphabet.indexOf(current) != -1)
+		            {
+		                int index2 = alphabet.indexOf(current);
+		                char newChar = rotbet.charAt(index2);
+		                
+		                if(caseflag)
+		                	answer.setCharAt(i, newChar);
+		                else
+		                	answer.setCharAt(i, Character.toLowerCase(newChar));
+		            }
+				}
 			return answer.toString();
 			} // end of method
 		} // end of class
@@ -525,14 +511,13 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int pr) throws IllegalArgumentException {
-		if(pr == 0)
-		{
+		
+		if(pr <= 0)
 			throw new IllegalArgumentException();
-		}
 		
 		int count = 0;
 		
-		for(int i = 0; i < pr * 100 ; i++)
+		for(int i = 0; i < pr * 50; i++)
 		{
 			if(primeCheck(i))
 				count++;
@@ -724,6 +709,7 @@ public class EvaluationService {
 		String lowstring = string.toLowerCase();
 		char test = 'a';
 		int count = 0;
+		
 		for(int i = 0; i < 26; i++)
 		{
 			if(lowstring.contains(String.valueOf(test)))
@@ -746,16 +732,13 @@ public class EvaluationService {
 		LocalDateTime time;
 		
 		if(given instanceof LocalDateTime)
-		{
 			time = ((LocalDateTime) given).plusSeconds(1000000000);
-		}
 		else
 		{
 			LocalDateTime loc = ((LocalDate)given).atStartOfDay();
 			time = loc.plusSeconds(1000000000);
 		}
-		
-		                     
+		                  
 		return time;
 	}
 
@@ -776,6 +759,7 @@ public class EvaluationService {
 		int sum = 0;
 		List<Integer> answers = new ArrayList<Integer>();
 		int total = 0;
+		
 		for(int j = 0; j < set.length; j++)
 		{
 			for(int k = 0; k < i; k++)
@@ -841,8 +825,8 @@ public class EvaluationService {
 			return false;
 		
 		int count = cleanIn.length();
-		
 		int[] nums = new int[count];
+		
 		for(int i = 0; i < nums.length; i++)
 			nums[i] = Integer.parseInt(cleanIn.substring(i, i+1));
 		
@@ -850,10 +834,10 @@ public class EvaluationService {
 		{
 			int numero = nums[i];
 			numero *= 2;
+			
 			if(numero > 9)
-			{
 				numero = numero % 10 + 1;
-			}
+			
 			nums[i] = numero;
 		}
 		
