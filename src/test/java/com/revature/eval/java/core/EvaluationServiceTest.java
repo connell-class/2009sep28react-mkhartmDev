@@ -405,7 +405,7 @@ public class EvaluationServiceTest {
 	}
 
 	@Test
-	public void rotateCapitalLetters() {
+	public void rotatCapitalLetters() {
 		EvaluationService.RotationalCipher rotationalCipher = new EvaluationService.RotationalCipher(5);
 		assertEquals("TRL", rotationalCipher.rotate("OMG"));
 	}

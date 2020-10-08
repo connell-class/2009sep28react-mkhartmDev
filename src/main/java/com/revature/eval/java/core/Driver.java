@@ -6,14 +6,5 @@ public class Driver {
 		
 
 
-
-    String abc = "";
-    abc.concat("abc");
-    abc.concat("def");
-    System.out.print(abc);
-
-		
-
-
 		}
 	}
