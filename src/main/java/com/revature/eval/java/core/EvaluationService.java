@@ -215,7 +215,7 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		String newS = string.replaceAll("\n", "");
-		String[] stringArr = newS.split("[\s,]");
+		String[] stringArr = newS.split("[ ,]");
 		int count = 0;
 		Map<String, Integer> may = new HashMap<String, Integer>();
 		
